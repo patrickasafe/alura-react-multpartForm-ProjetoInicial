@@ -1,3 +1,14 @@
+## Class 02
+
+In this class, I learned: 
+
+- Limitations when using JSX and switches
+- Calling functions inside JSX
+- Remember closures e scopes
+- Advantages of dependencies' injection inside a project
+- Components re-utilization  
+- Refactoring Switch cases and better code's structures
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
