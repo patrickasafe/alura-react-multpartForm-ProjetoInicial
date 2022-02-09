@@ -1,30 +1,25 @@
 import React, { Component } from "react";
 import "./App.css";
 import RegisterForm from "./components/RegisterForm/RegisterForm";
-import 'fontsource-roboto';
+import "fontsource-roboto";
+import { Container, Typography } from "@material-ui/core";
+import { checkPassword, checkSSN } from "./models/register";
 
-import {Container, Typography } from "@material-ui/core"
 class App extends Component {
   render() {
     return (
       <Container component="article" maxWidth="sm">
-        <Typography variant="h3" component="h1" align="center" >Formulário de cadastro</Typography>
-        <RegisterForm aoEnviar={aoEnviarForm} validarCPF={validarCPF} />
+        <Typography variant="h3" component="h1" align="center">
+          Formulário de cadastro
+        </Typography>
+        <RegisterForm whenSending={whenSendingForm} checks={{ssn:checkSSN, password:checkPassword}} />
       </Container>
     );
   }
 }
 
-function aoEnviarForm(dados){
-  console.log(dados);
-}
-
-function validarCPF(cpf){
-  if(cpf.length !== 11){
-    return {valido:false, texto:"CPF deve ter 11 digitos."}
-  }else{
-    return {valido:true, texto:""}
-  }
+function whenSendingForm(data) {
+  console.log(data);
 }
 
 export default App;

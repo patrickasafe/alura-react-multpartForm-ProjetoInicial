@@ -1,14 +1,14 @@
 import { TextField, Button } from '@material-ui/core';
 import React, { useState } from 'react';
 
-const UserData= ({aoEnviar}) => {
+const UserData= ({ whenSending}) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   
   return(
     <form onSubmit={(event) => {
       event.preventDefault();
-      aoEnviar({email, password})
+      whenSending({email, password})
     }}>
       <TextField 
         value={email}

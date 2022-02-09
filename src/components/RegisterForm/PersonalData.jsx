@@ -1,18 +1,29 @@
 import React, { useState } from "react";
 import { TextField, Button, Switch, FormControlLabel } from "@material-ui/core";
 
-function PersonalData({aoEnviar, validarCPF}) {
+function PersonalData({ whenSending, checks }) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [ssn, setSsn] = useState("");
+  const [ssn, setSSN] = useState("");
   const [sales, setSales] = useState(true);
   const [news, setNews] = useState(false);
-  const [errors, setErrors] = useState({cpf:{valido:true, texto:""}})
+  const [errors, setErrors] = useState({ssn:{valid:true, text:""}})
+
+  const checkFields = (event) => {
+    const {name, value} = event.target;
+    console.log(value)
+    const newState = {...errors}
+    newState[name] = checks[name](value)
+    setErrors(newState)
+    console.log(errors)
+  }
+
+
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        aoEnviar({name, lastName, ssn, news, sales});
+        whenSending({name, lastName, ssn, news, sales});
       }}
     >
       <TextField
@@ -40,16 +51,13 @@ function PersonalData({aoEnviar, validarCPF}) {
       <TextField
         value={ssn}
         onChange={(event) => {
-          setSsn(event.target.value);
+          setSSN(event.target.value);
         }}
-
-        onBlur={(event)=>{
-          const ehValido = validarCPF(ssn);
-          setErrors({ssn:ehValido})
-        }}
-        error={!errors.ssn.valido}
-        helperText={errors.ssn.texto}
+        onBlur={checkFields}
+        error={!errors.ssn.valid}
+        helperText={errors.ssn.text}
         id="CPF"
+        name="ssn"
         label="CPF"
         variant="outlined"
         margin="normal"
