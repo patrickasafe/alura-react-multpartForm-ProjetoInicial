@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import { TextField, Button, Switch, FormControlLabel } from "@material-ui/core";
 
-function DadosPessoais({aoEnviar, validarCPF}) {
-  const [nome, setNome] = useState("");
-  const [sobrenome, setSobrenome] = useState("");
-  const [cpf, setCpf] = useState("");
-  const [promocoes, setPromocoes] = useState(true);
-  const [novidades, setNovidades] = useState(false);
-  const [erros, setErros] = useState({cpf:{valido:true, texto:""}})
+function PersonalData({aoEnviar, validarCPF}) {
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [ssn, setSsn] = useState("");
+  const [sales, setSales] = useState(true);
+  const [news, setNews] = useState(false);
+  const [errors, setErrors] = useState({cpf:{valido:true, texto:""}})
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        aoEnviar({nome, sobrenome, cpf, novidades, promocoes});
+        aoEnviar({name, lastName, ssn, news, sales});
       }}
     >
       <TextField
-        value={nome}
+        value={name}
         onChange={(event) => {
-          setNome(event.target.value);
+          setName(event.target.value);
         }}
         id="nome"
         label="Nome"
@@ -27,9 +27,9 @@ function DadosPessoais({aoEnviar, validarCPF}) {
         fullWidth
       />
       <TextField
-        value={sobrenome}
+        value={lastName}
         onChange={(event) => {
-          setSobrenome(event.target.value);
+          setLastName(event.target.value);
         }}
         id="sobrenome"
         label="Sobrenome"
@@ -38,17 +38,17 @@ function DadosPessoais({aoEnviar, validarCPF}) {
         fullWidth
       />
       <TextField
-        value={cpf}
+        value={ssn}
         onChange={(event) => {
-          setCpf(event.target.value);
+          setSsn(event.target.value);
         }}
 
         onBlur={(event)=>{
-          const ehValido = validarCPF(cpf);
-          setErros({cpf:ehValido})
+          const ehValido = validarCPF(ssn);
+          setErrors({ssn:ehValido})
         }}
-        error={!erros.cpf.valido}
-        helperText={erros.cpf.texto}
+        error={!errors.ssn.valido}
+        helperText={errors.ssn.texto}
         id="CPF"
         label="CPF"
         variant="outlined"
@@ -60,9 +60,9 @@ function DadosPessoais({aoEnviar, validarCPF}) {
         label="Promoções"
         control={
           <Switch
-            checked={promocoes}
+            checked={sales}
             onChange={(event) => {
-              setPromocoes(event.target.checked);
+              setSales(event.target.checked);
             }}
             name="promocoes"
             color="primary"
@@ -74,9 +74,9 @@ function DadosPessoais({aoEnviar, validarCPF}) {
         label="Novidades"
         control={
           <Switch
-            checked={novidades}
+            checked={news}
             onChange={(event) => {
-              setNovidades(event.target.checked);
+              setNews(event.target.checked);
             }}
             name="novidades"
             color="primary"
@@ -91,4 +91,4 @@ function DadosPessoais({aoEnviar, validarCPF}) {
   );
 }
 
-export default DadosPessoais;
+export default PersonalData;
