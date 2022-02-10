@@ -4,7 +4,7 @@ import PersonalData from "./PersonalData";
 import DeliverData from "./DeliverData";
 import { StepLabel, Stepper, Typography, Step } from "@material-ui/core";
 
-const RegisterForm = ({ whenSending, checks }) => {
+const RegisterForm = ({ whenSending }) => {
   const [stage, setStage] = useState(0);
   const [collectedData, setCollectedData] = useState({});
   useEffect(() => {
@@ -21,9 +21,9 @@ const RegisterForm = ({ whenSending, checks }) => {
   };
 
   const forms = [
-    <UserData whenSending={CollectData} checks={checks} />,
-    <PersonalData whenSending={CollectData} checks={checks} />,
-    <DeliverData whenSending={CollectData} checks={checks} />,
+    <UserData whenSending={CollectData} />,
+    <PersonalData whenSending={CollectData} />,
+    <DeliverData whenSending={CollectData} />,
     <Typography variant="h5">Obrigado pelo Cadastro!</Typography>,
   ];
 

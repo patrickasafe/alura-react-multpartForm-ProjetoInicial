@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+
 import "./App.css";
-import RegisterForm from "./components/RegisterForm/RegisterForm";
 import "fontsource-roboto";
+
 import { Container, Typography } from "@material-ui/core";
+
 import { checkPassword, checkSSN } from "./models/register";
+
+import RegisterForm from "./components/RegisterForm/RegisterForm";
+import RegisterValidations from "./contexts/RegisterValidations";
 
 class App extends Component {
   render() {
@@ -12,7 +17,11 @@ class App extends Component {
         <Typography variant="h3" component="h1" align="center">
           Formulário de cadastro
         </Typography>
-        <RegisterForm whenSending={whenSendingForm} checks={{ssn:checkSSN, password:checkPassword}} />
+        <RegisterValidations.Provider
+          value={{ ssn: checkSSN, password: checkPassword }}
+        >
+          <RegisterForm whenSending={whenSendingForm} />
+        </RegisterValidations.Provider>
       </Container>
     );
   }

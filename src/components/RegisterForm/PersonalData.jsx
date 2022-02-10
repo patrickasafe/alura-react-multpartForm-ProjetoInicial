@@ -1,29 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { TextField, Button, Switch, FormControlLabel } from "@material-ui/core";
+import RegisterValidations from "../../contexts/RegisterValidations";
+import useErrors from "../../hooks/useErrors";
 
-function PersonalData({ whenSending, checks }) {
+
+function PersonalData({ whenSending }) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [ssn, setSSN] = useState("");
   const [sales, setSales] = useState(true);
   const [news, setNews] = useState(false);
-  const [errors, setErrors] = useState({ssn:{valid:true, text:""}})
 
-  const checkFields = (event) => {
-    const {name, value} = event.target;
-    console.log(value)
-    const newState = {...errors}
-    newState[name] = checks[name](value)
-    setErrors(newState)
-    console.log(errors)
-  }
+  const checks = useContext(RegisterValidations)
+  
+  const [errors, checkFields, possibleSubmit] = useErrors(checks)
+  
+
+  
 
 
   return (
     <form
       onSubmit={(event) => {
-        event.preventDefault();
-        whenSending({name, lastName, ssn, news, sales});
+        event.prevdentDefault();
+        possibleSubmit() && whenSending({name, lastName, ssn, news, sales});
       }}
     >
       <TextField
