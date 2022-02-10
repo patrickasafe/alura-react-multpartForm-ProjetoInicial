@@ -22,7 +22,7 @@ function PersonalData({ whenSending }) {
   return (
     <form
       onSubmit={(event) => {
-        event.prevdentDefault();
+        event.preventDefault();
         possibleSubmit() && whenSending({name, lastName, ssn, news, sales});
       }}
     >
